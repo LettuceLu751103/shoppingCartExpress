@@ -1,7 +1,23 @@
 1. git init .
 2. npm init -y
-3. git commit -m "project initialize
+3. git commit -m "project initialize"
 4. npm install express-generator -g
-// 會在當前專案建立基礎檔案
 5. express --view=hbs .
-6. 
+// 會在當前專案建立基礎檔案
+6. npm install mysql2 sequelize sequelize-cli
+7. npx sequeliz init
+// 創建 config\config.json
+// created models folder
+// created migrations folder
+// created seeders folder
+8. npx sequelize model:generate --name Product --attributes name:string,description:text,price:integer,image:string
+9. npx sequelize model:generate --name Cart --attributes quantity:integer
+10. npx sequelize model:generate --name Order --attributes name:string,phone:string,address:string,amount:integer,sn:integer,shipping_status:string,payment_status:string,UserId:integer
+11. npx sequelize model:generate --name Payment --attributes amount:integer,sn:integer,payment_method:string,paid_at:date,params:text,OrderId:integer
+12. npx sequelize model:generate --name CartItem --attributes CartId:integer,ProductId:integer,quantity:integer
+13. npx sequelize model:generate --name OrderItem --attributes OrderId:integer,ProductId:integer,price:integer,quantity:integer
+14. npx sequelize model:generate --name User --attributes email:string,password:string,role:string
+15. 新增 DB: create database shopping_cart_express;
+16. npx sequelize db:migrate
+17. 在 models 裡面建立 關聯關係
+18. 
