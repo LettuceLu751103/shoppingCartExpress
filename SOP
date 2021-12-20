@@ -20,4 +20,13 @@
 15. 新增 DB: create database shopping_cart_express;
 16. npx sequelize db:migrate
 17. 在 models 裡面建立 關聯關係
-18. 
+18. npx sequelize seed:generate --name create-Seed-product
+19. npm install faker
+20. npx sequelize seed:generate --name create-seed-carts
+21. npx sequelize seed:generate --name create-seed-cartItems
+22. npx sequelize seed:generate --name create-seed-orders
+23. npx sequelize seed:generate --name create-seed-payments
+24. npx sequelize seed:generate --name create-seed-orderItems
+25. npx sequelize db:seed:all
+26. 如果要 rollback 假資料, npx sequelize db:seed:undo:all
+27. 
