@@ -1,4 +1,7 @@
 1. git init .
 2. npm init -y
 3. git commit -m "project initialize
-4. 
+4. npm install express-generator -g
+// 會在當前專案建立基礎檔案
+5. express --view=hbs .
+6. 
