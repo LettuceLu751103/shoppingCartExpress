@@ -1,0 +1,33 @@
+<h1>顯示購物車</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    {{#each carts}}
+    <tbody>
+        <tr>
+            <td>
+                <img src="{{this.items.image}}" style="width:90px; height:40px;">
+                <span>{{this.items.name}}</span>
+            </td>
+            <td>
+                $ {{this.items.price}}
+            </td>
+            <td>
+                <span><i class="fas fa-minus border p-1"></i></span>
+                <span>4</span>
+                <span><i class="fas fa-plus  border p-1"></i></span>
+            </td>
+            <td>{{this.items.price}} * 2</td>
+            <td><i class="fas fa-trash-alt"></i></td>
+        </tr>
+    </tbody>
+    {{/each}}
+</table>
