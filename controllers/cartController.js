@@ -4,7 +4,8 @@ const CartItem = db.CartItem
 const Product = db.Product
 const cartController = {
     getCart: (req, res) => {
-        console.log(req.session)
+
+
         Cart.findAndCountAll({
             raw: true,
             nest: true,

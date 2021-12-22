@@ -1,6 +1,7 @@
 const db = require('../models')
 const Product = db.Product
-
+const CartItem = db.CartItem
+const Cart = db.Cart
 
 let productController = {
     getProducts: (req, res) => {
@@ -10,6 +11,19 @@ let productController = {
         if (req.query.page) {
             offset = (req.query.page - 1) * pageLimit
         }
+
+        console.log(req.session)
+        console.log(req.session.cartId)
+        Cart.findByPk(req.session.cartId || 0, {
+            include: [
+                { model: Product, as: 'items' }
+            ]
+        }).then(cartItems => {
+            console.log(cartItems)
+        }).catch(error => {
+            console.log(error)
+        })
+
         Product.findAndCountAll({
             offset: PAGE_OFFSET,
             limit: PAGE_LIMIT,
