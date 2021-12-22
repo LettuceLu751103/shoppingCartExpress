@@ -29,4 +29,6 @@
 24. npx sequelize seed:generate --name create-seed-orderItems
 25. npx sequelize db:seed:all
 26. 如果要 rollback 假資料, npx sequelize db:seed:undo:all
-27. 
+27. 在 route/index.js 裡面添加產品頁, 購物車頁路由, 並對應相對之controller
+28. 在 views/layouts/main.hbs 放入共用模板 => 所有網頁都會套入
+29. 
