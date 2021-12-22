@@ -10,8 +10,10 @@
                         <h5 class="card-title">{{this.name}}</h5>
                         <p class="card-text">{{this.description}}</p>
                         <p>{{this.price}}</p>
-                        <a class="btn btn-block btn-primary">加入購物車</a>
-
+                        <form action="/cart" method="POST">
+                            <input type='hidden' name="productId" value="{{this.id}}">
+                            <button type='submit' class="btn btn-block btn-primary">加入購物車</button>
+                        </form>
                     </div>
                 </div>
             </div>
