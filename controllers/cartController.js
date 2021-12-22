@@ -20,6 +20,35 @@ const cartController = {
                 console.log(error)
             })
 
+    },
+    postCart: (req, res) => {
+        return Cart.findOrCreate({
+            where: {
+                id: req.session.cartId || 0,
+            }
+        }).spread(function (cart, created) {
+            return CartItem.findOrCreate({
+                where: {
+                    CartId: cart.id,
+                    ProductId: req.body.ProductId
+
+                },
+                default: {
+                    CartId: cart.id,
+                    ProductId: req.body.ProductId
+                }
+            }).spread(function (cartItem, created) {
+                return cartItem.update({
+                    quantity: (cartItem.quantity || 0)
+                        + 1,
+                }).then((cartItem) => {
+                    req.session.cartId = cart.id
+                    return req.session.save(() => {
+                        return res.redirect('back')
+                    })
+                })
+            })
+        })
     }
 }
 
