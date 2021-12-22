@@ -64,20 +64,13 @@ const cartController = {
                         }).catch(error => {
                             console.log(error)
                         })
-                    } else {
-
-                        console.log('33333333333333333333333333333333333333333333')
-
-                        // console.log(cartItems)
-
-
                     }
-                    // console.log(cartItems)
+                    req.session.cartId = carts.dataValues.id
+                    return req.session.save(() => {
+                        return res.redirect('back')
+                    })
                 })
-                req.session.cartId = carts.dataValues.id
-                return req.session.save(() => {
-                    return res.redirect('back')
-                })
+
             } else {
 
                 console.log("進入else")
