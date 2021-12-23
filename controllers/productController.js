@@ -1,3 +1,4 @@
+const { response } = require('express')
 const db = require('../models')
 const Product = db.Product
 const CartItem = db.CartItem
@@ -12,40 +13,70 @@ let productController = {
             offset = (req.query.page - 1) * pageLimit
         }
 
-        console.log(req.session)
-        console.log(req.session.cartId)
-        Cart.findByPk(req.session.cartId || 0, {
+        // console.log(req.session)
+        // console.log(req.session.cartId)
+        const cartFindAll = Cart.findByPk(req.session.cartId || 0, {
             include: [
                 { model: Product, as: 'items' }
             ]
-        }).then(cartItems => {
-            console.log(cartItems)
-        }).catch(error => {
-            console.log(error)
         })
-
-        Product.findAndCountAll({
+        const productFindAll = Product.findAndCountAll({
             offset: PAGE_OFFSET,
             limit: PAGE_LIMIT,
             raw: true,
             nest: true
-        }).then(products => {
-            const page = Number(req.query.page) || 1
-            const pages = Math.ceil(products.count / PAGE_LIMIT)
-            console.log(pages)
-            const totalPage = Array.from({ length: pages }).map((item, index) => (index + 1))
-            const prev = page - 1 < 1 ? 1 : page - 1
-            const next = page + 1 > pages ? pages : page + 1
-            // console.log(products)
-            // products = products.rows.map(r => ({
-            //     ...r.dataVaules,
-
-            // }))
-            return res.render('products', {
-                products: products.rows,
-                page, pages, prev, next
-            })
         })
+        Promise.all([cartFindAll, productFindAll])
+            .then(responses => {
+                let [carts, products] = responses
+                // console.log('===============================')
+                // console.log(carts)
+                // console.log('===============================')
+                // // console.log(products)
+                // console.log('===============================')
+                const page = Number(req.query.page) || 1
+                const pages = Math.ceil(products.count / PAGE_LIMIT)
+                // console.log(pages)
+                const totalPage = Array.from({ length: pages }).map((item, index) => (index + 1))
+                const prev = page - 1 < 1 ? 1 : page - 1
+                const next = page + 1 > pages ? pages : page + 1
+                let total = 0
+                // carts = carts.dataValues.
+                if (carts) {
+                    // console.log(carts.dataValues.items)
+                    carts = carts.dataValues.items.map(cart => ({
+                        ...cart.dataValues,
+                        quantity: cart.dataValues.CartItem.quantity
+                    }))
+                    carts.forEach(cart => {
+                        // console.log(cart)
+                        total += cart.quantity * cart.price
+                    })
+                }
+
+                return res.render('products', {
+                    products: products.rows,
+                    page, pages, prev, next, total, carts
+                })
+            })
+        // Product.findAndCountAll({
+        //     offset: PAGE_OFFSET,
+        //     limit: PAGE_LIMIT,
+        //     raw: true,
+        //     nest: true
+        // }).then(products => {
+        //     const page = Number(req.query.page) || 1
+        //     const pages = Math.ceil(products.count / PAGE_LIMIT)
+        //     console.log(pages)
+        //     const totalPage = Array.from({ length: pages }).map((item, index) => (index + 1))
+        //     const prev = page - 1 < 1 ? 1 : page - 1
+        //     const next = page + 1 > pages ? pages : page + 1
+
+        //     return res.render('products', {
+        //         products: products.rows,
+        //         page, pages, prev, next
+        //     })
+        // })
     }
 }
 

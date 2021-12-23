@@ -1,5 +1,5 @@
 <h1>顯示購物車</h1>
-
+<a href="/products">購物商場</a>
 <table class="table">
     <thead>
         <tr>
@@ -22,12 +22,15 @@
             </td>
             <td>
                 <span><i class="fas fa-minus border p-1"></i></span>
-                <span>4</span>
+                <span>{{this.quantity}}</span>
                 <span><i class="fas fa-plus  border p-1"></i></span>
             </td>
-            <td>{{this.items.price}} * 2</td>
+            <td>{{this.items.price}} * {{this.quantity}}</td>
             <td><i class="fas fa-trash-alt"></i></td>
         </tr>
     </tbody>
     {{/each}}
 </table>
+
+<hr>
+<div><span>Total: </span> $<span>{{total}}</span></div>
