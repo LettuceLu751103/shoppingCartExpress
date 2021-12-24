@@ -36,12 +36,10 @@
                         <p class="">${{this.price}}</p>
                         <div>
                             <form action="/cartItem/{{this.id}}/add" method="post">
-                                <input type="hidden" name="{{this.id}}">
                                 <button class="btn btn-outline-primary">+</button>
                             </form>
                             <span>{{this.quantity}}</span>
-                            <form>
-                                <input type="hidden" id="{{this.id}}">
+                            <form action="/cartItem/{{this.id}}/sub" method="post">
                                 <button class="btn btn-outline-primary">-</button>
                             </form>
 

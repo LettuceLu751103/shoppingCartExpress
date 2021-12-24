@@ -100,21 +100,44 @@ const cartController = {
         });
     },
     addCartItem: (req, res) => {
-        console.log('CartId: ' + req.session.CartId)
-        console.log('ProductId: ' + req.body.id)
+        console.log(req.session.cartId)
+        console.log('ProductId: ' + req.params.id)
         CartItem.findOne({
-            CartId: req.session.CartId,
-            ProductId: req.body.id
+            where: {
+                CartId: req.session.cartId,
+                ProductId: req.params.id
+            }
+        }).then(item => {
+            console.log(item)
+            item.update({ quantity: item.dataValues.quantity + 1 })
+                .then(itemUpdate => {
+                    return res.redirect('back')
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         })
-            .then(item => {
-                console.log(item)
-                // item.update({ quantity: quantity + 1 })
-                // return res.redirect('back')
-            })
 
     },
     subCartItem: (req, res) => {
-
+        console.log('ProductId: ' + req.params.id)
+        console.log('CartId: ' + req.session.cartId)
+        CartItem.findOne({
+            where: {
+                ProductId: req.params.id,
+                CartId: req.session.cartId
+            }
+        }).then(item => {
+            console.log(item)
+            console.log('============== 準備減少數量 -1 ==============')
+            item.update({ quantity: item.dataValues.quantity - 1 > 0 ? item.dataValues.quantity - 1 : 0 })
+                .then(itemUpdate => {
+                    return res.redirect('back')
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
     },
     deleteCartItem: (req, res) => {
 
