@@ -42,6 +42,11 @@
                             <form action="/cartItem/{{this.id}}/add" method="post" style="display: inline;">
                                 <button class="btn btn-outline-primary">+</button>
                             </form>
+                            <form action="/cartItem/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+                                <button class="btn btn-outline-ligth" type="submit">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
