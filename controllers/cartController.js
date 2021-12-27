@@ -5,6 +5,7 @@ const Product = db.Product
 const cartController = {
     getCart: (req, res) => {
         const cartId = req.session.cartId || 0
+        console.log(req.session.cartId)
         Cart.findAndCountAll({
             raw: true,
             nest: true,
@@ -22,6 +23,9 @@ const cartController = {
                 carts.forEach(cartItem => {
                     total += cartItem.items.price * cartItem.quantity
                 })
+                if (carts[0].items.id === null) {
+                    carts = []
+                }
                 return res.render('carts', {
                     carts: carts,
                     total: total
@@ -140,7 +144,20 @@ const cartController = {
         })
     },
     deleteCartItem: (req, res) => {
-
+        console.log('=== 進入 deleteCartItem ===')
+        console.log(req.session.cartId)
+        console.log('=== productId ===')
+        console.log(req.params.id)
+        CartItem.findOne({
+            where: {
+                CartId: req.session.cartId,
+                ProductId: req.params.id
+            }
+        }).then(cartItem => {
+            console.log(cartItem)
+            cartItem.destroy()
+            return res.redirect('back')
+        })
     },
 }
 

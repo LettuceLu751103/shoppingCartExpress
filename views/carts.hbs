@@ -1,5 +1,5 @@
 <h1>顯示購物車</h1>
-<a href="/products">購物商場</a>
+<a href="/products">購物商場</a> 
 <table class="table">
     <thead>
         <tr>
@@ -10,6 +10,7 @@
             <th scope="col">Action</th>
         </tr>
     </thead>
+
     {{#each carts}}
     <tbody>
         <tr>
@@ -21,15 +22,26 @@
                 $ {{this.items.price}}
             </td>
             <td>
-                <span><i class="fas fa-minus border p-1"></i></span>
+                <form action="/cartItem/{{this.items.id}}/add" method="post">
+                    <button class="btn btn-outline-primary">+</button>
+                </form>
                 <span>{{this.quantity}}</span>
-                <span><i class="fas fa-plus  border p-1"></i></span>
+                <form action="/cartItem/{{this.items.id}}/sub" method="post">
+                    <button class="btn btn-outline-primary">-</button>
+                </form>
             </td>
             <td>{{this.items.price}} * {{this.quantity}}</td>
-            <td><i class="fas fa-trash-alt"></i></td>
+            <td>
+                <form action="/cartItem/{{this.items.id}}?_method=DELETE" method="POST">
+                    <button class="btn btn-outline-ligth" type="submit">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
         </tr>
     </tbody>
     {{/each}}
+
 </table>
 
 <hr>
