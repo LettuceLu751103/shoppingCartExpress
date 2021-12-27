@@ -46,3 +46,21 @@
 
 <hr>
 <div><span>Total: </span> $<span>{{total}}</span></div>
+
+<form action="/orders" method="post" class="mt-5">
+    <input type="text" name="">
+    <div class="mb-3">
+        <label for="name" class="form-label">購買人姓名</label>
+        <input type="text" class="form-control" id="name" name="name">
+
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">購買人電話</label>
+        <input type="tel" class="form-control" id="phone" name="phone">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">購買人地址</label>
+        <input type="text" class="form-control" id="address" name="address">
+    </div>
+    <button type="submit" class="btn btn-primary">成立訂單</button>
+</form>
