@@ -134,6 +134,9 @@ const cartController = {
         }).then(item => {
             console.log(item)
             console.log('============== 準備減少數量 -1 ==============')
+            if (item.dataValues.quantity - 1 === 0) {
+                item.destroy()
+            }
             item.update({ quantity: item.dataValues.quantity - 1 > 0 ? item.dataValues.quantity - 1 : 0 })
                 .then(itemUpdate => {
                     return res.redirect('back')

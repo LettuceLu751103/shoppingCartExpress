@@ -35,14 +35,13 @@
                         <p class="">{{this.name}}</p>
                         <p class="">${{this.price}}</p>
                         <div>
-                            <form action="/cartItem/{{this.id}}/add" method="post">
-                                <button class="btn btn-outline-primary">+</button>
-                            </form>
-                            <span>{{this.quantity}}</span>
-                            <form action="/cartItem/{{this.id}}/sub" method="post">
+                            <form action="/cartItem/{{this.id}}/sub" method="post" style="display: inline;">
                                 <button class="btn btn-outline-primary">-</button>
                             </form>
-
+                            <span>{{this.quantity}}</span>
+                            <form action="/cartItem/{{this.id}}/add" method="post" style="display: inline;">
+                                <button class="btn btn-outline-primary">+</button>
+                            </form>
                         </div>
                     </div>
                 </div>
