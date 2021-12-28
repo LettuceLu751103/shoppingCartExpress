@@ -1,7 +1,9 @@
 <h1>訂單詳情頁面</h1>
+{{#each orders}}
 
 <div class="row mt-5">
     <div class="col-md-8">
+
         <table class="table">
             <thead>
                 <tr>
@@ -11,41 +13,39 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each this.dataValues.items}}
                 <tr>
-                    <td>Mark</td>
-                    <td>7</td>
-                    <td>$ <span>534</span></td>
+                    <td>{{this.dataValues.name}}</td>
+                    <td>{{this.dataValues.OrderItem.dataValues.quantity}}</td>
+                    <td>$ <span>{{this.dataValues.price}}</span></td>
                 </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>2</td>
-                    <td>$ <span>234</span></td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>3</td>
-                    <td>$ <span>584</span></td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>1</td>
-                    <td>$ <span>934</span></td>
-                </tr>
+
+
             </tbody>
+            {{/each}}
+
+            <tfoot>
+                <tr>
+                    <div>
+                        <td>Total: <span>{{this.dataValues.amount}}</span></td>
+                    </div>
+                </tr>
+            </tfoot>
+
         </table>
-        <div>
-            <span>Total: <span>84895</span></span>
-        </div>
+
+
+
     </div>
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
 
-                <p class="card-text"> 數量: 1</p>
-                <p class="card-text"> 地址: 1</p>
-                <p class="card-text"> 電話: 1</p>
-                <p class="card-text"> 運送狀態: 1</p>
-                <p class="card-text"> 付款狀態: 1</p>
+                <p class="card-text"> 訂單編號: {{this.dataValues.id}}</p>
+                <p class="card-text"> 地址: {{this.dataValues.address}}</p>
+                <p class="card-text"> 電話: {{this.dataValues.phone}}</p>
+                <p class="card-text"> 運送狀態: {{this.dataValues.shipping_status}}</p>
+                <p class="card-text"> 付款狀態: {{this.dataValues.payment_status}}</p>
 
                 <a href="#" class="btn btn-primary">取消訂單</a>
                 <a href="#" class="btn btn-primary">立即付款</a>
@@ -54,4 +54,6 @@
     </div>
 
 </div>
+
 <hr>
+{{/each}}
