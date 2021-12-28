@@ -2,6 +2,8 @@
 const orderController = {
     getOrders: (req, res) => {
         console.log('=== 進入 getOrder ===')
+
+        return res.render('orders', {})
     },
 
     postOrders: (req, res) => {
