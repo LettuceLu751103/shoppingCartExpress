@@ -26,7 +26,9 @@ const cartController = {
                 if (carts[0].items.id === null) {
                     carts = []
                 }
+                console.log(carts)
                 return res.render('carts', {
+                    cartId: req.session.cartId,
                     carts: carts,
                     total: total
                 })
