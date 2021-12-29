@@ -20,8 +20,7 @@ router.post('/cartItem/:id/sub', cartController.subCartItem)
 
 router.get('/orders', orderController.getOrders)
 router.post('/orders', orderController.postOrders)
-
-
+router.post('/order/:id/cancel', orderController.cancelOrder)
 
 
 module.exports = router;

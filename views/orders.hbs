@@ -1,6 +1,6 @@
 <h1>訂單詳情頁面</h1>
 {{#each orders}}
-
+{{#if cancelOrder}}
 <div class="row mt-5">
     <div class="col-md-8">
 
@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each this.dataValues.items}}
+                {{#each this.items}}
                 <tr>
                     <td>{{this.dataValues.name}}</td>
                     <td>{{this.dataValues.OrderItem.dataValues.quantity}}</td>
@@ -27,7 +27,7 @@
             <tfoot>
                 <tr>
                     <div>
-                        <td>Total: <span>{{this.dataValues.amount}}</span></td>
+                        <td>Total: <span>{{this.amount}}</span></td>
                     </div>
                 </tr>
             </tfoot>
@@ -41,13 +41,14 @@
         <div class="card">
             <div class="card-body">
 
-                <p class="card-text"> 訂單編號: {{this.dataValues.id}}</p>
-                <p class="card-text"> 地址: {{this.dataValues.address}}</p>
-                <p class="card-text"> 電話: {{this.dataValues.phone}}</p>
-                <p class="card-text"> 運送狀態: {{this.dataValues.shipping_status}}</p>
-                <p class="card-text"> 付款狀態: {{this.dataValues.payment_status}}</p>
-
-                <a href="#" class="btn btn-primary">取消訂單</a>
+                <p class="card-text"> 訂單編號: {{this.id}}</p>
+                <p class="card-text"> 地址: {{this.address}}</p>
+                <p class="card-text"> 電話: {{this.phone}}</p>
+                <p class="card-text"> 運送狀態: {{this.shipping_status}}</p>
+                <p class="card-text"> 付款狀態: {{this.payment_status}}</p>
+                <form action="/order/{{this.id}}/cancel" method="post">
+                    <button type="submit" class="btn btn-primary">取消訂單</button>
+                </form>
                 <a href="#" class="btn btn-primary">立即付款</a>
             </div>
         </div>
@@ -56,4 +57,5 @@
 </div>
 
 <hr>
+{{/if}}
 {{/each}}

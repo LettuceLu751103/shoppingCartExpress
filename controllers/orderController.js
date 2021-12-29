@@ -13,8 +13,16 @@ const orderController = {
 
         }).then(orders => {
 
+            orders = orders.map(order => ({
+                ...order.dataValues,
+                cancelOrder: !(order.shipping_status === '-1')
+            }))
 
-            return res.render('orders', { orders })
+
+
+            console.log(orders)
+
+            return res.render('orders', { orders, cancelOrder: orders.cancelOrder })
         })
 
     },
@@ -45,7 +53,21 @@ const orderController = {
                 );
             })
         })
+    },
+    cancelOrder: (req, res) => {
+        return Order.findByPk(req.params.id).then(order => {
+            order.update({
+                // ...req.body,
+                shipping_status: '-1',
+                payment_status: '-1',
+            }).then(order => {
+                console.log(order)
+
+                return res.redirect('/cart')
+            })
+        })
     }
+
 }
 
 
