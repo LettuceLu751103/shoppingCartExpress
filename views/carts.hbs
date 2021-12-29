@@ -61,5 +61,17 @@
         <label for="address" class="form-label">購買人地址</label>
         <input type="text" class="form-control" id="address" name="address">
     </div>
+    <div class="mb-3">
+        <input type="hidden" class="form-control" id="cartId" name="cartId" value="{{cartId}}">
+    </div>
+    <div class="mb-3">
+        <input type="hidden" class="form-control" id="amount" name="amount" value="{{total}}">
+    </div>
+    <div class="mb-3">
+        <input type="hidden" class="form-control" id="shipping_status" name="shipping_status" value="0">
+    </div>
+    <div class="mb-3">
+        <input type="hidden" class="form-control" id="payment_status" name="payment_status" value="0">
+    </div>
     <button type="submit" class="btn btn-primary">成立訂單</button>
 </form>

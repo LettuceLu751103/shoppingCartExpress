@@ -2,6 +2,7 @@ const db = require('../models')
 const Cart = db.Cart
 const CartItem = db.CartItem
 const Product = db.Product
+const Order = db.Order
 const cartController = {
     getCart: (req, res) => {
         const cartId = req.session.cartId || 0
@@ -26,7 +27,10 @@ const cartController = {
                 if (carts[0].items.id === null) {
                     carts = []
                 }
+                console.log(carts)
+
                 return res.render('carts', {
+                    cartId: req.session.cartId,
                     carts: carts,
                     total: total
                 })
